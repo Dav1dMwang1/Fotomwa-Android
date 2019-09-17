@@ -1,0 +1,28 @@
+<resources>
+    <!--Application Name-->
+    <string name="app_name">Fotomwa Ltd</string>
+
+    <!--Welcome Slider-->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Photography!</string>
+    <string name="slide_1_desc">Enjoy our Professional Photography.</string>
+
+    <string name="slide_2_title">Convenient Pickup</string>
+    <string name="slide_2_desc">Collect Your Photos at you own convenience thanks to our secure storage.</string>
+
+    <string name="slide_3_title">Great Accessories</string>
+    <string name="slide_3_desc">Get Cameras and the Accessories to pair with as you capture memories.</string>
+
+    <string name="slide_4_title">Homely Studio</string>
+    <string name="slide_4_desc">Enjoy bringing the Family to Cherish the Home of the Heart.</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!--Landing Page-->
+
+</resources>

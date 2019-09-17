@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/fmwa_gyellow">
+
+    <!--The Logo Pic-->
+    <ImageView
+        android:id="@+id/welcome_logo"
+        android:layout_width="@dimen/welcome_logo_dimen"
+        android:layout_height="@dimen/welcome_logo_dimen"
+        android:layout_centerVertical="true"
+        android:src="@drawable/fotomwa_logo_pic" />
+
+    <!--The Logo Text-->
+    <TextView
+        android:id="@+id/welcome_logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/welcome_logo"
+        android:layout_centerVertical="true"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/logo_text_size"/>
+
+    <!--The Star Grid Image-->
+    <ImageView
+        android:id="@+id/shape2"
+        android:layout_width="@dimen/shape_dimen"
+        android:layout_height="@dimen/shape_dimen"
+        android:src="@drawable/star_grid"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
