@@ -1,4 +1,4 @@
-package com.example.dijonkariz.fotomwa;
+package com.example.dijonkariz.fotomwa.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.dijonkariz.fotomwa.PrefManager;
+import com.example.dijonkariz.fotomwa.R;
 
 public class WelcomeSlider extends AppCompatActivity {
 
@@ -118,7 +121,7 @@ public class WelcomeSlider extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeSlider.this, Landing_Page.class));
+        startActivity(new Intent(WelcomeSlider.this, LandingPageActivity.class));
         finish();
     }
 

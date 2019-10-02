@@ -1,4 +1,4 @@
-package com.example.dijonkariz.fotomwa;
+package com.example.dijonkariz.fotomwa.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.example.dijonkariz.fotomwa.R;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
@@ -32,6 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(towelcomeslider);
                 MainActivity.this.finish();
             }
-        }, 10000);
+        }, 2500);
     }
 }

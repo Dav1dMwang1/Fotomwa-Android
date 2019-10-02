@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FF9F00</color>
+    <color name="colorPrimaryDark">#C06B00</color>
+    <color name="colorAccent">#FF7D54</color>
 
     <!--Interested Colours-->
     <color name="fmwa_gyellow">#FFD700</color>
+    <color name="fmwa_dyellow">#FF9F00</color>
     <!--<color name="fmwa_red">#B30000</color>-->
     <!--<color name="fmwa_black">#FFD700</color>-->
     <!--<color name="fmwa_blue">#FFD700</color>-->
