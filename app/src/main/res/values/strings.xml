@@ -63,9 +63,16 @@
 
 
 <!--    Login and Register-->
+    <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
     <string name="signup_login_hint">Already have an account? Sign In</string>
     <string name="login_signup_hint">Don\'t have an account? Sign Up</string>
+    <string name="link_signup">No account yet? Create one</string>
+    <string name="fotomwa_logo">Fotomwa Logo</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="address">Local Address</string>
+    <string name="name">User Name</string>
 </resources>

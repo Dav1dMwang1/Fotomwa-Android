@@ -110,9 +110,6 @@ public class LandingPageActivity extends AppCompatActivity {
                     case R.id.order:
                         Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
                         break;
-                    case R.id.re_orders:
-                        Toast.makeText(LandingPageActivity.this, R.string.re_order, Toast.LENGTH_LONG).show();
-                        break;
                     case R.id.current_orders:
                         Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
                         break;

@@ -14,12 +14,6 @@
         android:title="@string/new_order"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/re_orders"
-        android:enabled="true"
-        android:icon="@drawable/progress"
-        android:title="@string/re_order"
-        app:showAsAction="ifRoom"/>
-    <item
         android:id="@+id/current_orders"
         android:enabled="true"
         android:icon="@drawable/progress"
