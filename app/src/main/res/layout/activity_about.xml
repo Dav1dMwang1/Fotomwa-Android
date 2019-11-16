@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dijonkariz.fotomwa.fragments.SettingsFragment">
+    tools:context="com.example.dijonkariz.fotomwa.fragments.AboutUsFragment">
+
+    <include layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/settings_fragment_title" />
+        android:text="@string/activity_title_about_us" />
 
 </FrameLayout>

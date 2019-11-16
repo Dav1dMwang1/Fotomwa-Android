@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,24 +34,32 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.dijonkariz.fotomwa.R;
+import com.example.dijonkariz.fotomwa.fragments.AboutUsFragment;
 import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
 import com.example.dijonkariz.fotomwa.fragments.OrdersFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
+import com.example.dijonkariz.fotomwa.fragments.PrivacyPolicyFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
 import com.example.dijonkariz.fotomwa.other.CircleTransform;
-
-import java.util.Objects;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class LandingPageActivity extends AppCompatActivity {
     private static final String TAG = LandingPageActivity.class.getSimpleName();
-    private static final String TAG_HOME = "home";
-    private static final String TAG_PHOTOS = "photos";
-    private static final String TAG_ORDERS = "movies";
-    private static final String TAG_NOTIFICATIONS = "notifications";
-    private static final String TAG_SETTINGS = "settings";
+    private static final String TAG_HOME = HomeFragment.class.getSimpleName();
+    private static final String TAG_PHOTOS = PhotosFragment.class.getSimpleName();
+    private static final String TAG_ORDERS = OrdersFragment.class.getSimpleName();
+    private static final String TAG_NOTIFICATIONS = NotificationsFragment.class.getSimpleName();
+    private static final String TAG_SETTINGS = SettingsFragment.class.getSimpleName();
+    private static final String TAG_ABOUT = AboutUsActivity.class.getSimpleName();
+    private static final String TAG_PRIVACY = PrivacyPolicyActivity.class.getSimpleName();
+    private static String CURRENT_TAG = TAG_HOME;
+
+    public static int navItemIndex = 0;
+    private boolean shouldLoadHomeFragOnBackPress = true;
+    // toolbar titles respected to selected nav menu item
+    private String[] activityTitles;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationDrawerView;
@@ -61,9 +68,8 @@ public class LandingPageActivity extends AppCompatActivity {
     private ImageView imgProfile;
     private View navHeader;
     private ProgressBar progressBar;
-
+    private Handler handler;
     private TextView textName, textRole;
-
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
 
@@ -78,6 +84,8 @@ public class LandingPageActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.fmwa_red));
         setSupportActionBar(toolbar);
 
+        handler = new Handler();
+
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerToggle = setupDrawerToggle();
         drawerLayout.addDrawerListener(drawerToggle);
@@ -91,6 +99,8 @@ public class LandingPageActivity extends AppCompatActivity {
         imgProfile = navHeader.findViewById(R.id.img_profile);
         progressBar = navHeader.findViewById(R.id.progressBar_cyclic);
 
+        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+
         loadNavHeader();
 
         navigationDrawerView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -101,6 +111,12 @@ public class LandingPageActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        if (savedInstanceState == null) {
+            navItemIndex = 0;
+            CURRENT_TAG = TAG_HOME;
+            loadHomeFragment();
+        }
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -136,66 +152,116 @@ public class LandingPageActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        // show menu only when home fragment is selected
+        if (navItemIndex == 0) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        }
+
+        // when fragment is notifications, load the menu created for notifications
+        if (navItemIndex == 3) {
+            getMenuInflater().inflate(R.menu.notifications, menu);
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
             return true;
+        }
+
+        // user is in notifications fragment
+        // and selected 'Mark all as Read'
+        if (id == R.id.action_mark_all_read) {
+            Toast.makeText(getApplicationContext(), "All notifications marked as read!", Toast.LENGTH_LONG).show();
+        }
+
+        // user is in notifications fragment
+        // and selected 'Clear All'
+        if (id == R.id.action_clear_notifications) {
+            Toast.makeText(getApplicationContext(), "Clear all notifications!", Toast.LENGTH_LONG).show();
         }
 
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers();
+            return;
+        }
+
+        // This code loads home fragment when back key is pressed
+        // when user is in other fragment than home
+        if (shouldLoadHomeFragOnBackPress) {
+            // checking if user is on other navigation menu
+            // rather than home
+            if (navItemIndex != 0) {
+                navItemIndex = 0;
+                CURRENT_TAG = TAG_HOME;
+                loadHomeFragment();
+                return;
+            }
+        }
+        super.onBackPressed();
+    }
+
     public void selectDrawerItem (MenuItem menuItem) {
-        Fragment fragment = null;
-        Class fragmentClass;
+//        Fragment fragment = null;
+//        Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_orders:
-                Toast.makeText(LandingPageActivity.this, R.string.orders_fragment_intro, Toast.LENGTH_LONG).show();
-                fragmentClass = OrdersFragment.class;
+                navItemIndex = 1;
+                CURRENT_TAG = TAG_ORDERS;
+//                fragmentClass = OrdersFragment.class;
                 break;
             case R.id.nav_photos:
-                Toast.makeText(LandingPageActivity.this, R.string.photos_fragment_intro, Toast.LENGTH_LONG).show();
-                fragmentClass = PhotosFragment.class;
+                navItemIndex = 2;
+                CURRENT_TAG = TAG_PHOTOS;
+//                fragmentClass = PhotosFragment.class;
                 break;
             case R.id.nav_notifications:
-                Toast.makeText(LandingPageActivity.this, R.string.notifications_fragment_intro, Toast.LENGTH_LONG).show();
-                fragmentClass = NotificationsFragment.class;
+                navItemIndex = 3;
+                CURRENT_TAG = TAG_NOTIFICATIONS;
                 break;
             case R.id.nav_settings:
-                Toast.makeText(LandingPageActivity.this, R.string.settings_fragment_intro, Toast.LENGTH_LONG).show();
-                fragmentClass = SettingsFragment.class;
+                navItemIndex = 4;
+                CURRENT_TAG = TAG_SETTINGS;
                 break;
             case R.id.nav_about_us:
-                Toast.makeText(LandingPageActivity.this, R.string.activity_title_about_us, Toast.LENGTH_LONG).show();
-                fragmentClass = AboutUsActivity.class;
-                break;
+                startActivity(new Intent(LandingPageActivity.this, AboutUsActivity.class));
+                drawerLayout.closeDrawers();
+                return;
             case R.id.nav_privacy_policy:
-                Toast.makeText(LandingPageActivity.this, R.string.activity_title_privacy_policy, Toast.LENGTH_LONG).show();
-                fragmentClass = PrivacyPolicyActivity.class;
-                break;
+                startActivity(new Intent(LandingPageActivity.this, PrivacyPolicyActivity.class));
+                drawerLayout.closeDrawers();
+                return;
             case R.id.nav_home:
             default:
-                Toast.makeText(LandingPageActivity.this, R.string.home_fragment_intro, Toast.LENGTH_LONG).show();
-                fragmentClass = HomeFragment.class;
+                navItemIndex = 0;
+                CURRENT_TAG = TAG_HOME;
+                break;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (menuItem.isChecked()) {
+            menuItem.setChecked(false);
+        } else {
+            menuItem.setChecked(true);
         }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame, fragment).commit();
-
         menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
-        drawerLayout.closeDrawers();
+
+        loadHomeFragment();
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -236,5 +302,68 @@ public class LandingPageActivity extends AppCompatActivity {
 
         // showing dot next to notifications label
         navigationDrawerView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+    }
+
+    private void loadHomeFragment() {
+        // selecting appropriate nav menu item
+        selectNavMenu();
+
+        // set toolbar title
+        setToolbarTitle();
+
+        // if user select the current navigation menu again, don't do anything
+        // just close the navigation drawer
+        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
+            drawerLayout.closeDrawers();
+            return;
+        }
+
+        Runnable mPendingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Fragment fragment = getHomeFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        };
+
+        handler.post(mPendingRunnable);
+
+        drawerLayout.closeDrawers();
+
+        invalidateOptionsMenu();
+
+    }
+
+    private Fragment getHomeFragment() {
+        switch (navItemIndex) {
+            case 1:
+                Toast.makeText(LandingPageActivity.this, R.string.orders_fragment_title, Toast.LENGTH_LONG).show();
+                return new OrdersFragment();
+            case 2:
+                Toast.makeText(LandingPageActivity.this, R.string.photos_fragment_title, Toast.LENGTH_LONG).show();
+                return new PhotosFragment();
+            case 3:
+                Toast.makeText(LandingPageActivity.this, R.string.notifications_fragment_title, Toast.LENGTH_LONG).show();
+                return new NotificationsFragment();
+            case 4:
+                Toast.makeText(LandingPageActivity.this, R.string.settings_fragment_title, Toast.LENGTH_LONG).show();
+                return new SettingsFragment();
+            case 0:
+            default:
+                Toast.makeText(LandingPageActivity.this, R.string.home_fragment_title, Toast.LENGTH_LONG).show();
+                return new HomeFragment();
+        }
+    }
+
+    private void setToolbarTitle() {
+        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+    }
+
+    private void selectNavMenu() {
+        navigationDrawerView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 }
