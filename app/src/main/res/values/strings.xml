@@ -75,4 +75,12 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="address">Local Address</string>
     <string name="name">User Name</string>
+    <string name="nav_image_background_banner">Nav Image Background Banner</string>
+    <string name="nav_user_icon">Nav User Icon</string>
+    <string name="settings_fragment_intro">Hello!! This is Settings Fragment</string>
+    <string name="home_fragment_intro">Home Fragment</string>
+    <string name="notifications_fragment_intro">Notifications Fragment</string>
+    <string name="orders_fragment_intro">Orders Fragment</string>
+    <string name="photos_fragment_into">Photos Fragment</string>
+    <string name="nav_header_text">Chike Mgbemena</string>
 </resources>

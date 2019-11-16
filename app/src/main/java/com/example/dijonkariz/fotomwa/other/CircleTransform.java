@@ -3,10 +3,8 @@ package com.example.dijonkariz.fotomwa.other;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Shader;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
