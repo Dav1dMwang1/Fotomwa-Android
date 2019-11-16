@@ -5,14 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+
 public class CircleTransform extends BitmapTransformation {
-    public CircleTransform(Context context) {
-        super(context);
-    }
+    private static final String ID = "com.bumptech.glide.transformations.FillSpace";
+    private static final byte[] ID_BYTES = ID.getBytes(Charset.forName("UTF-8"));
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
@@ -43,7 +46,7 @@ public class CircleTransform extends BitmapTransformation {
     }
 
     @Override
-    public String getId() {
-        return getClass().getName();
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+        messageDigest.update(ID_BYTES);
     }
 }

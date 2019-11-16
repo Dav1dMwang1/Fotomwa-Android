@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_background"
+        android:background="@color/fmwa_ayellow"
         android:contentDescription="@string/nav_image_background_banner" />
 
     <LinearLayout
@@ -22,6 +22,13 @@
         android:focusable="true"
         android:padding="@dimen/activity_horizontal_margin">
 
+        <ProgressBar
+            android:id="@+id/progressBar_cyclic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:minWidth="50dp" />
+
         <ImageView
             android:id="@+id/img_profile"
             android:layout_width="@dimen/profile_width"
@@ -31,18 +38,18 @@
             android:contentDescription="@string/nav_user_icon" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:textColor="@color/fmwa_red"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/website"
+            android:id="@+id/user_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="@string/nav_header_text"
+            android:textColor="@color/fmwa_red"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
