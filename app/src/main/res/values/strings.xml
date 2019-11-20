@@ -85,4 +85,6 @@
     <string name="photos_fragment_title">Photos Fragment</string>
 
     <string name="nav_header_text">User Name</string>
+    <string name="overflow_desc">TODO</string>
+    <string name="thumbnail_desc">TODO</string>
 </resources>
