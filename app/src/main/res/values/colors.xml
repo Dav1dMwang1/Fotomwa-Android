@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FFB839</color>
-    <color name="colorPrimaryDark">#C06B00</color>
-    <color name="colorAccent">#FF7D54</color>
+    <color name="colorPrimaryDark">#C78800</color>
+    <color name="colorPrimaryLight">#FFEA6C</color>
+    <color name="colorAccent">#E33B34</color>
 
     <!--Interested Colours-->
     <color name="fmwa_gyellow">#FFD700</color>
     <color name="fmwa_dyellow">#FF9F00</color>
     <color name="fmwa_ayellow">#FFC200</color>
-    <color name="fmwa_red">#EB3E37</color>>
+    <color name="fmwa_red">#E33B34</color>>
 
     <!--Screens Background Color-->
     <color name="bg_screen1">@color/fmwa_gyellow</color>
@@ -62,7 +63,7 @@
     <color name="iron">#CCCCCC</color>
     <color name="white">#FFFFFF</color>
 
-<!--    User CardView-->
+<!--    Order CardView-->
     <color name="viewBg">#f1f5f8</color>
     <color name="album_title">#4c4c4c</color>
 </resources>

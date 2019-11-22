@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,14 +37,14 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.dijonkariz.fotomwa.R;
-import com.example.dijonkariz.fotomwa.fragments.AboutUsFragment;
 import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
 import com.example.dijonkariz.fotomwa.fragments.OrdersFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
-import com.example.dijonkariz.fotomwa.fragments.PrivacyPolicyFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
 import com.example.dijonkariz.fotomwa.other.CircleTransform;
+
+import java.util.Objects;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -57,32 +60,38 @@ public class LandingPageActivity extends AppCompatActivity {
     private static String CURRENT_TAG = TAG_HOME;
 
     public static int navItemIndex = 0;
-    private boolean shouldLoadHomeFragOnBackPress = true;
+    AppBarLayout appBarLayout;
+    CollapsingToolbarLayout collapsingToolbar;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationDrawerView;
-    private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private ImageView imgProfile;
-    private View navHeader;
+    private ImageView sideNavUserProfileImg, userProfileImg;
     private ProgressBar progressBar;
     private Handler handler;
     private TextView textName, textRole;
+    private Button editProfile, viewProfile, moreRecentOrders;
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
 
-    private static final String urlProfileImg = "https://moodle.htwchur.ch/pluginfile.php/124614/mod_page/content/4/example.jpg";
+    private static final String urlProfileImg = "https://kiss100.s3.amazonaws.com/wp-content/uploads/2019/06/kenyan-men.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        toolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appbar_main);
+        collapsingToolbar = appBarLayout.findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitleEnabled(false);
+
+        toolbar = appBarLayout.findViewById(R.id.toolbar_main);
         toolbar.setTitleTextColor(getResources().getColor(R.color.fmwa_red));
         setSupportActionBar(toolbar);
+
+        initCollapsingToolbar();
 
         handler = new Handler();
 
@@ -93,15 +102,23 @@ public class LandingPageActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         navigationDrawerView = findViewById(R.id.side_nav_view);
-        navHeader = navigationDrawerView.getHeaderView(0);
+        View navHeader = navigationDrawerView.getHeaderView(0);
         textName = navHeader.findViewById(R.id.user_name);
         textRole = navHeader.findViewById(R.id.user_desc);
-        imgProfile = navHeader.findViewById(R.id.img_profile);
+        sideNavUserProfileImg = navHeader.findViewById(R.id.img_profile);
+        userProfileImg = findViewById(R.id.user_profile_img);
+        editProfile = findViewById(R.id.edit_profile);
+        viewProfile = findViewById(R.id.view_profile);
+
         progressBar = navHeader.findViewById(R.id.progressBar_cyclic);
 
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
         loadNavHeader();
+
+//        OnClick Listerners for the Buttons
+        launchEditProfile();
+        launchViewProfile();
 
         navigationDrawerView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -118,7 +135,7 @@ public class LandingPageActivity extends AppCompatActivity {
             loadHomeFragment();
         }
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -126,10 +143,10 @@ public class LandingPageActivity extends AppCompatActivity {
                     case R.id.view_orders:
                         Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
                         break;
-                    case R.id.order:
+                    case R.id.make_order:
                         Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
                         break;
-                    case R.id.current_orders:
+                    case R.id.order_progress:
                         Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
                         break;
                 }
@@ -204,6 +221,7 @@ public class LandingPageActivity extends AppCompatActivity {
 
         // This code loads home fragment when back key is pressed
         // when user is in other fragment than home
+        boolean shouldLoadHomeFragOnBackPress = true;
         if (shouldLoadHomeFragOnBackPress) {
             // checking if user is on other navigation menu
             // rather than home
@@ -298,7 +316,32 @@ public class LandingPageActivity extends AppCompatActivity {
                 .transition(withCrossFade())
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgProfile);
+                .into(userProfileImg);
+
+//        Load Main Order Profile Image
+        Glide.with(this).load(urlProfileImg)
+                .apply(new RequestOptions()
+                        .placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
+                        .error(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
+                        .transform(new CircleTransform())
+                )
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .transition(withCrossFade())
+                .thumbnail(0.5f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(sideNavUserProfileImg);
 
         // showing dot next to notifications label
         navigationDrawerView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
@@ -323,8 +366,7 @@ public class LandingPageActivity extends AppCompatActivity {
             public void run() {
                 Fragment fragment = getHomeFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
+                fragmentTransaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -341,11 +383,11 @@ public class LandingPageActivity extends AppCompatActivity {
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 1:
-                Toast.makeText(LandingPageActivity.this, R.string.orders_fragment_title, Toast.LENGTH_LONG).show();
-                return new OrdersFragment();
-            case 2:
                 Toast.makeText(LandingPageActivity.this, R.string.photos_fragment_title, Toast.LENGTH_LONG).show();
                 return new PhotosFragment();
+            case 2:
+                Toast.makeText(LandingPageActivity.this, R.string.orders_fragment_title, Toast.LENGTH_LONG).show();
+                return new OrdersFragment();
             case 3:
                 Toast.makeText(LandingPageActivity.this, R.string.notifications_fragment_title, Toast.LENGTH_LONG).show();
                 return new NotificationsFragment();
@@ -360,10 +402,61 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     private void setToolbarTitle() {
-        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(activityTitles[navItemIndex]);
     }
 
     private void selectNavMenu() {
         navigationDrawerView.getMenu().getItem(navItemIndex).setChecked(true);
     }
+
+    private void initCollapsingToolbar() {
+//        final CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(" ");
+//        AppBarLayout appBarLayout = findViewById(R.id.appbar_main);
+        appBarLayout.setExpanded(true);
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle(getString(R.string.app_name));
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
+    }
+
+//    Listener for Launching Editing Order Profile Activity
+    private void launchEditProfile() {
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LandingPageActivity.this, getString(R.string.launch_editProfile), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+//    Listener for Launching Viewing Order Profile Activity
+    private void launchViewProfile() {
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LandingPageActivity.this, getString(R.string.launch_viewProfile), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+//    private void OrdersRecyclerView () {
+//
+//    }
 }

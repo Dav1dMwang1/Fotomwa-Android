@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="launch_editProfile">Launch Edit Profile Activity</string>
+    <string name="launch_viewProfile">Launch View Profile Activity</string>
+    <string name="recent_order_title">Recent Orders</string>
+    <string name="current_order_title">Current Order</string>
+    <string name="current_order_type">Type:</string>
+    <string name="current_order_date">Date:</string>
+    <string name="current_order_due_date">Due Date:</string>
+    <string name="expand">More</string>
+    <string name="view_current_order_info">Info</string>
+    <string name="order_type_text">Order Type</string>
+    <string name="order_size_text">Order Size</string>
+    <string name="order_view_icon">Order View Icon</string>
+</resources>

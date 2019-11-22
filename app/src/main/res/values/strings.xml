@@ -27,7 +27,6 @@
     <string name="re_order">Re-Order</string>
     <string name="current_order">Progress</string>
 
-
     <!--Landing Page-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -78,13 +77,22 @@
     <string name="nav_image_background_banner">Nav Image Background Banner</string>
     <string name="nav_user_icon">Nav User Icon</string>
 
+
     <string name="settings_fragment_title">Settings Fragment</string>
     <string name="home_fragment_title">Home Fragment</string>
     <string name="notifications_fragment_title">Notifications Fragment</string>
     <string name="orders_fragment_title">Orders Fragment</string>
     <string name="photos_fragment_title">Photos Fragment</string>
 
+<!--    CardView-->
+    <string name="backdrop_desc">TODO</string>
     <string name="nav_header_text">User Name</string>
     <string name="overflow_desc">TODO</string>
     <string name="thumbnail_desc">TODO</string>
+    <string name="backdrop_title">USER NAME</string>
+    <string name="backdrop_subtitle">Email Address</string>
+
+<!--    Collapsing ToolBar-->
+    <string name="view_profile">View</string>
+    <string name="edit_profile">Edit</string>
 </resources>
