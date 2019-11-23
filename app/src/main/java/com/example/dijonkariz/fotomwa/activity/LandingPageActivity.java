@@ -5,20 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +15,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -42,7 +40,12 @@ import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
 import com.example.dijonkariz.fotomwa.fragments.OrdersFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
+import com.example.dijonkariz.fotomwa.other.BottomNavigationViewBehaviour;
 import com.example.dijonkariz.fotomwa.other.CircleTransform;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
@@ -136,21 +139,33 @@ public class LandingPageActivity extends AppCompatActivity {
         }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.view_orders:
-                        Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.make_order:
-                        Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.order_progress:
-                        Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
-                        break;
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.view_orders:
+                    Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.make_order:
+                    Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.order_progress:
+                    Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
+                    break;
+            }
+            return true;
+        });
+
+//        Reselecting the Bottom Navigation View
+        bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.view_orders:
+                    Toast.makeText(LandingPageActivity.this, "View Orders Reselected", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.make_order:
+                    Toast.makeText(LandingPageActivity.this, "New Order Reselected", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.order_progress:
+                    Toast.makeText(LandingPageActivity.this, "Progress for Orders Reselected", Toast.LENGTH_LONG).show();
+                    break;
             }
         });
     }
@@ -240,14 +255,12 @@ public class LandingPageActivity extends AppCompatActivity {
 //        Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_orders:
-                navItemIndex = 1;
-                CURRENT_TAG = TAG_ORDERS;
-//                fragmentClass = OrdersFragment.class;
-                break;
-            case R.id.nav_photos:
                 navItemIndex = 2;
                 CURRENT_TAG = TAG_PHOTOS;
-//                fragmentClass = PhotosFragment.class;
+                break;
+            case R.id.nav_photos:
+                navItemIndex = 1;
+                CURRENT_TAG = TAG_ORDERS;
                 break;
             case R.id.nav_notifications:
                 navItemIndex = 3;
@@ -296,8 +309,8 @@ public class LandingPageActivity extends AppCompatActivity {
         // Loading profile image
         Glide.with(this).load(urlProfileImg)
                 .apply(new RequestOptions()
-                        .placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
-                        .error(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
+                        .placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon, getTheme()))
+                        .error(getResources().getDrawable(android.R.drawable.sym_def_app_icon, getTheme()))
                         .transform(new CircleTransform())
                 )
                 .listener(new RequestListener<Drawable>() {
@@ -321,8 +334,8 @@ public class LandingPageActivity extends AppCompatActivity {
 //        Load Main Order Profile Image
         Glide.with(this).load(urlProfileImg)
                 .apply(new RequestOptions()
-                        .placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
-                        .error(getResources().getDrawable(android.R.drawable.sym_def_app_icon))
+                        .placeholder(getResources().getDrawable(android.R.drawable.sym_def_app_icon, getTheme()))
+                        .error(getResources().getDrawable(android.R.drawable.sym_def_app_icon, getTheme()))
                         .transform(new CircleTransform())
                 )
                 .listener(new RequestListener<Drawable>() {
@@ -361,15 +374,12 @@ public class LandingPageActivity extends AppCompatActivity {
             return;
         }
 
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                Fragment fragment = getHomeFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
+        Runnable mPendingRunnable = () -> {
+            Fragment fragment = getHomeFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.push_left_in, R.anim.push_left_out);
+            fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+            fragmentTransaction.commitAllowingStateLoss();
         };
 
         handler.post(mPendingRunnable);
@@ -438,22 +448,12 @@ public class LandingPageActivity extends AppCompatActivity {
 
 //    Listener for Launching Editing Order Profile Activity
     private void launchEditProfile() {
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LandingPageActivity.this, getString(R.string.launch_editProfile), Toast.LENGTH_LONG).show();
-            }
-        });
+        editProfile.setOnClickListener(v -> Toast.makeText(LandingPageActivity.this, getString(R.string.launch_editProfile), Toast.LENGTH_LONG).show());
     }
 
 //    Listener for Launching Viewing Order Profile Activity
     private void launchViewProfile() {
-        viewProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LandingPageActivity.this, getString(R.string.launch_viewProfile), Toast.LENGTH_LONG).show();
-            }
-        });
+        viewProfile.setOnClickListener(v -> Toast.makeText(LandingPageActivity.this, getString(R.string.launch_viewProfile), Toast.LENGTH_LONG).show());
     }
 
 //    private void OrdersRecyclerView () {

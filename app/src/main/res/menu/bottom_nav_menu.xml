@@ -4,19 +4,19 @@
     <item
         android:id="@+id/view_orders"
         android:enabled="true"
-        android:icon="@drawable/progress"
+        android:icon="@drawable/ic_order"
         android:title="@string/view_orders"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/make_order"
         android:enabled="true"
-        android:icon="@drawable/progress"
+        android:icon="@drawable/ic_make_order"
         android:title="@string/new_order"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/order_progress"
         android:enabled="true"
-        android:icon="@drawable/progress"
+        android:icon="@drawable/ic_progress"
         android:title="@string/current_order"
         app:showAsAction="ifRoom"/>
 </menu>

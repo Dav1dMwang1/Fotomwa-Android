@@ -1,33 +1,35 @@
 package com.example.dijonkariz.fotomwa.adapter;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dijonkariz.fotomwa.R;
+import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.objects.Order;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
-    private Context context;
-    private List<Order> orderList;
+//    private Context context;
+    private ArrayList<Order> orderList;
 
-    public OrdersAdapter(Context context, List<Order> orderList) {
-        this.context = context;
+    public OrdersAdapter(ArrayList<Order> orderList) {
+//        this.context = context;
         this.orderList = orderList;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView order_type, order_size;
-        public ImageView view_icon;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView order_type, order_size;
+        ImageView view_icon;
 
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             order_type = itemView.findViewById(R.id.order_type);
             order_size = itemView.findViewById(R.id.order_size);
@@ -46,14 +48,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final OrdersAdapter.MyViewHolder myViewHolder, int i) {
-        Order order = orderList.get(i);
-        myViewHolder.order_type.setText(order.getOrder_type());
-        myViewHolder.order_size.setText(order.getOrder_size());
+//        Order order = orderList.get(i);
+        myViewHolder.order_type.setText(orderList.get(i).getOrder_type());
+        myViewHolder.order_size.setText(orderList.get(i).getOrder_size());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return orderList.size();
     }
 
 }

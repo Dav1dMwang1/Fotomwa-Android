@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"  >
 
     <TextView
         android:id="@+id/order_type"
@@ -16,6 +17,7 @@
         android:id="@+id/order_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/order_type"
         android:layout_margin="8dp"
         android:text="@string/order_size_text"
         android:textSize="@dimen/order_list_text" />
@@ -26,6 +28,7 @@
         android:layout_height="@dimen/order_list_view_icon"
         android:src="@drawable/ic_view"
         android:layout_margin="8dp"
+        android:layout_alignParentEnd="true"
         android:contentDescription="@string/order_view_icon" />
 
-</LinearLayout>
+</RelativeLayout>
