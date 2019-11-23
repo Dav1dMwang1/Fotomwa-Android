@@ -21,7 +21,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -37,10 +36,8 @@ import com.bumptech.glide.request.target.Target;
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
-import com.example.dijonkariz.fotomwa.fragments.OrdersFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
-import com.example.dijonkariz.fotomwa.other.BottomNavigationViewBehaviour;
 import com.example.dijonkariz.fotomwa.other.CircleTransform;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -55,7 +52,6 @@ public class LandingPageActivity extends AppCompatActivity {
     private static final String TAG = LandingPageActivity.class.getSimpleName();
     private static final String TAG_HOME = HomeFragment.class.getSimpleName();
     private static final String TAG_PHOTOS = PhotosFragment.class.getSimpleName();
-    private static final String TAG_ORDERS = OrdersFragment.class.getSimpleName();
     private static final String TAG_NOTIFICATIONS = NotificationsFragment.class.getSimpleName();
     private static final String TAG_SETTINGS = SettingsFragment.class.getSimpleName();
     private static final String TAG_ABOUT = AboutUsActivity.class.getSimpleName();
@@ -63,8 +59,9 @@ public class LandingPageActivity extends AppCompatActivity {
     private static String CURRENT_TAG = TAG_HOME;
 
     public static int navItemIndex = 0;
-    AppBarLayout appBarLayout;
-    CollapsingToolbarLayout collapsingToolbar;
+    private AppBarLayout appBarLayout;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private BottomNavigationView bottomNavigationView;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
@@ -76,7 +73,6 @@ public class LandingPageActivity extends AppCompatActivity {
     private Handler handler;
     private TextView textName, textRole;
     private Button editProfile, viewProfile, moreRecentOrders;
-    // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
 
     private static final String urlProfileImg = "https://kiss100.s3.amazonaws.com/wp-content/uploads/2019/06/kenyan-men.jpg";
@@ -86,36 +82,11 @@ public class LandingPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
-        appBarLayout = findViewById(R.id.appbar_main);
-        collapsingToolbar = appBarLayout.findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitleEnabled(false);
-
-        toolbar = appBarLayout.findViewById(R.id.toolbar_main);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.fmwa_red));
-        setSupportActionBar(toolbar);
+        initContent();
 
         initCollapsingToolbar();
 
         handler = new Handler();
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerToggle.syncState();
-
-        navigationDrawerView = findViewById(R.id.side_nav_view);
-        View navHeader = navigationDrawerView.getHeaderView(0);
-        textName = navHeader.findViewById(R.id.user_name);
-        textRole = navHeader.findViewById(R.id.user_desc);
-        sideNavUserProfileImg = navHeader.findViewById(R.id.img_profile);
-        userProfileImg = findViewById(R.id.user_profile_img);
-        editProfile = findViewById(R.id.edit_profile);
-        viewProfile = findViewById(R.id.view_profile);
-
-        progressBar = navHeader.findViewById(R.id.progressBar_cyclic);
-
-        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
         loadNavHeader();
 
@@ -123,13 +94,10 @@ public class LandingPageActivity extends AppCompatActivity {
         launchEditProfile();
         launchViewProfile();
 
-        navigationDrawerView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Log.i(TAG, "NavigationItemSelectedListener");
-                selectDrawerItem(menuItem);
-                return true;
-            }
+        navigationDrawerView.setNavigationItemSelectedListener(menuItem -> {
+            Log.i(TAG, "NavigationItemSelectedListener");
+            selectDrawerItem(menuItem);
+            return true;
         });
 
         if (savedInstanceState == null) {
@@ -138,7 +106,7 @@ public class LandingPageActivity extends AppCompatActivity {
             loadHomeFragment();
         }
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.view_orders:
@@ -170,6 +138,37 @@ public class LandingPageActivity extends AppCompatActivity {
         });
     }
 
+    private void initContent() {
+        appBarLayout = findViewById(R.id.appbar_main);
+        collapsingToolbar = appBarLayout.findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitleEnabled(false);
+
+        toolbar = appBarLayout.findViewById(R.id.toolbar_main);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.fmwa_red, getTheme()));
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        drawerToggle.syncState();
+
+        navigationDrawerView = findViewById(R.id.side_nav_view);
+        View navHeader = navigationDrawerView.getHeaderView(0);
+        textName = navHeader.findViewById(R.id.user_name);
+        textRole = navHeader.findViewById(R.id.user_desc);
+        sideNavUserProfileImg = navHeader.findViewById(R.id.img_profile);
+        userProfileImg = findViewById(R.id.user_profile_img);
+        editProfile = findViewById(R.id.edit_profile);
+        viewProfile = findViewById(R.id.view_profile);
+
+        progressBar = navHeader.findViewById(R.id.progressBar_cyclic);
+
+        activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+    }
+
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
@@ -192,7 +191,7 @@ public class LandingPageActivity extends AppCompatActivity {
         }
 
         // when fragment is notifications, load the menu created for notifications
-        if (navItemIndex == 3) {
+        if (navItemIndex == 2) {
             getMenuInflater().inflate(R.menu.notifications, menu);
         }
         return true;
@@ -254,20 +253,16 @@ public class LandingPageActivity extends AppCompatActivity {
 //        Fragment fragment = null;
 //        Class fragmentClass;
         switch (menuItem.getItemId()) {
-            case R.id.nav_orders:
-                navItemIndex = 2;
-                CURRENT_TAG = TAG_PHOTOS;
-                break;
             case R.id.nav_photos:
                 navItemIndex = 1;
-                CURRENT_TAG = TAG_ORDERS;
+                CURRENT_TAG = TAG_PHOTOS;
                 break;
             case R.id.nav_notifications:
-                navItemIndex = 3;
+                navItemIndex = 2;
                 CURRENT_TAG = TAG_NOTIFICATIONS;
                 break;
             case R.id.nav_settings:
-                navItemIndex = 4;
+                navItemIndex = 3;
                 CURRENT_TAG = TAG_SETTINGS;
                 break;
             case R.id.nav_about_us:
@@ -396,12 +391,9 @@ public class LandingPageActivity extends AppCompatActivity {
                 Toast.makeText(LandingPageActivity.this, R.string.photos_fragment_title, Toast.LENGTH_LONG).show();
                 return new PhotosFragment();
             case 2:
-                Toast.makeText(LandingPageActivity.this, R.string.orders_fragment_title, Toast.LENGTH_LONG).show();
-                return new OrdersFragment();
-            case 3:
                 Toast.makeText(LandingPageActivity.this, R.string.notifications_fragment_title, Toast.LENGTH_LONG).show();
                 return new NotificationsFragment();
-            case 4:
+            case 3:
                 Toast.makeText(LandingPageActivity.this, R.string.settings_fragment_title, Toast.LENGTH_LONG).show();
                 return new SettingsFragment();
             case 0:

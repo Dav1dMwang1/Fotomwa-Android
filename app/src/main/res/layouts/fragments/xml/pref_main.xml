@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/general_pref_category">
+        <EditTextPreference
+            android:defaultValue="@string/default_gallery_storage"
+            android:key="@string/key_gallery_name"
+            android:summary="@string/default_gallery_storage"
+            android:title="@string/title_default_storage" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_upload_over_wifi"
+            android:summary="@string/summary_upload_over_wifi"
+            android:title="@string/title_auto_upload" />
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="@string/title_upload_quality"
+            android:entries="@array/pref_upload_quality_entries"
+            android:entryValues="@array/pref_upload_quality_values"
+            android:key="@string/key_upload_quality"
+            android:summary="@string/summary_upload_image_quality"
+            android:title="@string/title_upload_quality" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_upload_over_wifi"
+            android:summary="@string/summary_download_over_wifi"
+            android:title="@string/title_auto_download" />
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="@string/title_download_quality"
+            android:entries="@array/pref_download_quality_entries"
+            android:entryValues="@array/pref_download_quality_values"
+            android:key="@string/key_download_quality"
+            android:summary="@string/summary_download_image_quality"
+            android:title="@string/title_download_quality" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_title_notifications">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/notifications_new_message"
+            android:title="@string/title_new_notification_sound" />
+
+<!--        <RingtonePreference-->
+<!--            android:defaultValue="content://settings/system/notification_sound"-->
+<!--            android:dependency="@string/notifications_new_message"-->
+<!--            android:key="@string/key_notifications_new_message_ringtone"-->
+<!--            android:ringtoneType="notification"-->
+<!--            android:summary="@string/summary_choose_ringtone"-->
+<!--            android:title="@string/pref_title_ringtone" />-->
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_vibrate"
+            android:summary="@string/summary_vibrate"
+            android:title="@string/title_vibrate" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_about">
+        <Preference
+            android:selectable="false"
+            android:summary="@string/summary_about" />
+
+        <Preference
+            android:title="@string/app_version"
+            android:summary="@string/title_version" />
+
+        <Preference
+            android:key="@string/key_send_feedback"
+            android:title="@string/title_send_feedback"
+            android:summary="@string/summary_support" />
+
+        <Preference
+            android:title="@string/title_faq"
+            android:summary="@string/summary_faq">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_faq" />
+        </Preference>
+
+        <Preference android:title="@string/activity_title_privacy_policy">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/url_privacy"/>
+        </Preference>
+
+        <Preference android:title="@string/title_terms">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/url_terms"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

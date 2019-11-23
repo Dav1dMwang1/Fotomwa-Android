@@ -2,4 +2,7 @@
 <resources>
     <dimen name="user_profile_img_margin">5dp</dimen>
     <dimen name="order_list_view_icon">20dp</dimen>
+
+<!--    Settings-->
+
 </resources>

@@ -45,7 +45,6 @@
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
         <item>Photos</item>
-        <item>Orders</item>
         <item>Notifications</item>
         <item>Settings</item>
         <item>About Us</item>
