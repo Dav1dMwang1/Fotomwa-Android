@@ -1,4 +1,4 @@
-package com.example.dijonkariz.fotomwa.objects;
+package com.example.dijonkariz.fotomwa.model;
 
 public class Order {
     private String order_type;

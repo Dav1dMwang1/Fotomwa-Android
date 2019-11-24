@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.dijonkariz.fotomwa.fragments.PhotosFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gallery_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/photos_fragment_title" />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
 
 </FrameLayout>

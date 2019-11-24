@@ -22,8 +22,6 @@ import android.view.MenuItem;
 
 import com.example.dijonkariz.fotomwa.R;
 
-import java.util.Objects;
-
 public class SettingsFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsFragment.class.getSimpleName();
 
@@ -32,13 +30,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.pref_main);
-
-//        bindPreferenceSummaryToValue(findPreference(getString(R.string.key_upload_quality)));
-//        // gallery EditText change listener
-//        bindPreferenceSummaryToValue(findPreference(getString(R.string.key_gallery_name)));
-//
-//        // notification preference change listener
-//        bindPreferenceSummaryToValue(findPreference(getString(R.string.key_notifications_new_message_ringtone)));
 
         // feedback preference click listener
         Preference myPref = findPreference(getString(R.string.key_send_feedback));

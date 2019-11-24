@@ -1,4 +1,4 @@
-package com.example.dijonkariz.fotomwa.other;
+package com.example.dijonkariz.fotomwa.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

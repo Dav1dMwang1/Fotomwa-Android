@@ -4,5 +4,8 @@
     <dimen name="order_list_view_icon">20dp</dimen>
 
 <!--    Settings-->
+    <dimen name="alert_def_padding">18dp</dimen>
 
+<!--    Notifications-->
+    <dimen name="row_padding_vertical">10dp</dimen>
 </resources>

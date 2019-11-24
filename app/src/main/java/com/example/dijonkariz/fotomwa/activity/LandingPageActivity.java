@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +37,7 @@ import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
-import com.example.dijonkariz.fotomwa.other.CircleTransform;
+import com.example.dijonkariz.fotomwa.helper.CircleTransform;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -95,7 +94,6 @@ public class LandingPageActivity extends AppCompatActivity {
         launchViewProfile();
 
         navigationDrawerView.setNavigationItemSelectedListener(menuItem -> {
-            Log.i(TAG, "NavigationItemSelectedListener");
             selectDrawerItem(menuItem);
             return true;
         });
@@ -264,6 +262,8 @@ public class LandingPageActivity extends AppCompatActivity {
             case R.id.nav_settings:
                 navItemIndex = 3;
                 CURRENT_TAG = TAG_SETTINGS;
+//                startActivity(new Intent(LandingPageActivity.this, SettingsPrefActivity.class));
+//                drawerLayout.closeDrawers();
                 break;
             case R.id.nav_about_us:
                 startActivity(new Intent(LandingPageActivity.this, AboutUsActivity.class));
@@ -388,17 +388,13 @@ public class LandingPageActivity extends AppCompatActivity {
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 1:
-                Toast.makeText(LandingPageActivity.this, R.string.photos_fragment_title, Toast.LENGTH_LONG).show();
                 return new PhotosFragment();
             case 2:
-                Toast.makeText(LandingPageActivity.this, R.string.notifications_fragment_title, Toast.LENGTH_LONG).show();
                 return new NotificationsFragment();
             case 3:
-                Toast.makeText(LandingPageActivity.this, R.string.settings_fragment_title, Toast.LENGTH_LONG).show();
                 return new SettingsFragment();
             case 0:
             default:
-                Toast.makeText(LandingPageActivity.this, R.string.home_fragment_title, Toast.LENGTH_LONG).show();
                 return new HomeFragment();
         }
     }

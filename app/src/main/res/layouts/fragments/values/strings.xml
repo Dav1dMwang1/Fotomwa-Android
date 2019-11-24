@@ -53,6 +53,12 @@
     <string name="title_terms"><![CDATA[Terms & Conditions]]></string>
     <string name="pref_ringtone_silent">Silent</string>
     <string name="choose_email_client">Choose email Client</string>
+    <string name="gallery_thumbnail">Gallery Thumbnail</string>
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_description">Notification Description</string>
+    <string name="notification_time">Notification Time</string>
 
     <!--    Uploads-->
     <string-array name="pref_upload_quality_entries">

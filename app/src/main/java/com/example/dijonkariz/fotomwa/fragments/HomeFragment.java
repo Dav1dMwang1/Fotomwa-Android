@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.OrdersAdapter;
-import com.example.dijonkariz.fotomwa.objects.Order;
+import com.example.dijonkariz.fotomwa.model.Order;
 
 import java.util.ArrayList;
 
