@@ -59,17 +59,6 @@
     <string name="notification_title">Notification Title</string>
     <string name="notification_description">Notification Description</string>
     <string name="notification_time">Notification Time</string>
-    <string name="make_order_btn">Complete Order</string>
-    <string name="brand_type">Brand Type</string>
-    <string name="order_product">Order Product</string>
-    <string name="order_amount">Order Amount</string>
-    <string name="order_description">Order Description</string>
-    <string name="edit_radio_btn">Edit</string>
-    <string name="edit_and_print_radio_btn">Edit and Print</string>
-    <string name="upload">Upload Photo</string>
-    <string name="all_orders">All Orders</string>
-    <string name="order_progress">Order Progress</string>
-
     <!--    Uploads-->
     <string-array name="pref_upload_quality_entries">
         <item>360p</item>
@@ -85,7 +74,6 @@
         <item>3</item>
         <item>4</item>
     </string-array>
-
 <!--    Downloads-->
     <string-array name="pref_download_quality_entries">
         <item>360p</item>
@@ -101,4 +89,18 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <!--    Orders-->
+    <string name="make_order_btn">Complete Order</string>
+    <string name="brand_type">Brand Type</string>
+    <string name="order_product">Order Product</string>
+    <string name="order_amount">Order Amount</string>
+    <string name="order_description">Order Description</string>
+    <string name="edit_radio_btn">Edit</string>
+    <string name="edit_and_print_radio_btn">Edit and Print</string>
+    <string name="upload">Upload Photo</string>
+    <string name="all_orders">All Orders</string>
+    <string name="order_progress">Order Progress</string>
+    <string name="purchase_order">Purchase</string>
+
 </resources>

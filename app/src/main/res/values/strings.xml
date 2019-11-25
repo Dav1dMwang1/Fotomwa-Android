@@ -44,6 +44,7 @@
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>Home</item>
+        <item>Orders</item>
         <item>Photos</item>
         <item>Notifications</item>
         <item>Settings</item>
@@ -55,6 +56,7 @@
     <string name="activity_title_privacy_policy">Privacy Policy</string>
     <string name="action_clear_all">Clear All</string>
     <string name="action_logout">Logout</string>
+    <string name="action_profile">User Profile</string>
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="nav_other">Other</string>
     <string name="user_name">User Name</string>

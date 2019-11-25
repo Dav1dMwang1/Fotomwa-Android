@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp" />
 
-    <include layout="@layout/bottom_navigation"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+<!--    <include layout="@layout/bottom_navigation"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent" />-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/side_nav_view"

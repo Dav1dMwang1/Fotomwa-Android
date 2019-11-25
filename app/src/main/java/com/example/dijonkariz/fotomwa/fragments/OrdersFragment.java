@@ -1,20 +1,25 @@
-package com.example.dijonkariz.fotomwa.fragments.orders;
+package com.example.dijonkariz.fotomwa.fragments;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.OrdersAdapter;
-import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
 import com.example.dijonkariz.fotomwa.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewOrderFragment extends Fragment {
-    private static final String TAG = NotificationsFragment.class.getSimpleName();
+public class OrdersFragment extends Fragment {
+    private static final String TAG = OrdersFragment.class.getSimpleName();
     private List<Order> orders = new ArrayList<>();
     private RecyclerView recyclerView;
     private View.OnClickListener onItemClickListener = v -> {
@@ -25,5 +30,16 @@ public class ViewOrderFragment extends Fragment {
     };
     private OrdersAdapter ordersAdapter;
 
-    public ViewOrderFragment() {}
+    public OrdersFragment() {}
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+
+        ordersAdapter = new OrdersAdapter(getContext(), orders);
+
+
+        return view;
+    }
 }

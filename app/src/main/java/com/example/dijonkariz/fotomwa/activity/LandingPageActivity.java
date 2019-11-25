@@ -35,6 +35,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.fragments.HomeFragment;
 import com.example.dijonkariz.fotomwa.fragments.NotificationsFragment;
+import com.example.dijonkariz.fotomwa.fragments.OrdersFragment;
 import com.example.dijonkariz.fotomwa.fragments.PhotosFragment;
 import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
 import com.example.dijonkariz.fotomwa.helper.CircleTransform;
@@ -50,6 +51,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class LandingPageActivity extends AppCompatActivity {
     private static final String TAG = LandingPageActivity.class.getSimpleName();
     private static final String TAG_HOME = HomeFragment.class.getSimpleName();
+    private static final String TAG_ORDERS = OrdersFragment.class.getSimpleName();
     private static final String TAG_PHOTOS = PhotosFragment.class.getSimpleName();
     private static final String TAG_NOTIFICATIONS = NotificationsFragment.class.getSimpleName();
     private static final String TAG_SETTINGS = SettingsFragment.class.getSimpleName();
@@ -105,35 +107,35 @@ public class LandingPageActivity extends AppCompatActivity {
         }
 
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.view_orders:
-                    Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.make_order:
-                    Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.order_progress:
-                    Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
-                    break;
-            }
-            return true;
-        });
+//        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+//            switch (menuItem.getItemId()) {
+//                case R.id.view_orders:
+//                    Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.make_order:
+//                    Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.order_progress:
+//                    Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
+//                    break;
+//            }
+//            return true;
+//        });
 
 //        Reselecting the Bottom Navigation View
-        bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.view_orders:
-                    Toast.makeText(LandingPageActivity.this, "View Orders Reselected", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.make_order:
-                    Toast.makeText(LandingPageActivity.this, "New Order Reselected", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.order_progress:
-                    Toast.makeText(LandingPageActivity.this, "Progress for Orders Reselected", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        });
+//        bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
+//            switch (menuItem.getItemId()) {
+//                case R.id.view_orders:
+//                    Toast.makeText(LandingPageActivity.this, "View Orders Reselected", Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.make_order:
+//                    Toast.makeText(LandingPageActivity.this, "New Order Reselected", Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.order_progress:
+//                    Toast.makeText(LandingPageActivity.this, "Progress for Orders Reselected", Toast.LENGTH_LONG).show();
+//                    break;
+//            }
+//        });
     }
 
     private void initContent() {
@@ -251,19 +253,21 @@ public class LandingPageActivity extends AppCompatActivity {
 //        Fragment fragment = null;
 //        Class fragmentClass;
         switch (menuItem.getItemId()) {
-            case R.id.nav_photos:
+            case R.id.nav_orders:
                 navItemIndex = 1;
+                CURRENT_TAG = TAG_ORDERS;
+                break;
+            case R.id.nav_photos:
+                navItemIndex = 2;
                 CURRENT_TAG = TAG_PHOTOS;
                 break;
             case R.id.nav_notifications:
-                navItemIndex = 2;
+                navItemIndex = 3;
                 CURRENT_TAG = TAG_NOTIFICATIONS;
                 break;
             case R.id.nav_settings:
-                navItemIndex = 3;
+                navItemIndex = 4;
                 CURRENT_TAG = TAG_SETTINGS;
-//                startActivity(new Intent(LandingPageActivity.this, SettingsPrefActivity.class));
-//                drawerLayout.closeDrawers();
                 break;
             case R.id.nav_about_us:
                 startActivity(new Intent(LandingPageActivity.this, AboutUsActivity.class));
@@ -388,10 +392,12 @@ public class LandingPageActivity extends AppCompatActivity {
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 1:
-                return new PhotosFragment();
+                return new OrdersFragment();
             case 2:
-                return new NotificationsFragment();
+                return new PhotosFragment();
             case 3:
+                return new NotificationsFragment();
+            case 4:
                 return new SettingsFragment();
             case 0:
             default:
