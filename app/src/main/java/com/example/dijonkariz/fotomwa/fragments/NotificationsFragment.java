@@ -32,7 +32,7 @@ public class NotificationsFragment extends Fragment {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
         int position = viewHolder.getAdapterPosition();
         Message notificationMessage = messages.get(position);
-        Toast.makeText(getActivity(), "You Clicked: " + notificationMessage.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Does the Expand Notification Message to show more Content.", Toast.LENGTH_SHORT).show();
     };
     private MessagesAdapter messagesAdapter;
 

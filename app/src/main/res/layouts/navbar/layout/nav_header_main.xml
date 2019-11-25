@@ -26,6 +26,9 @@
             android:id="@+id/progressBar_cyclic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorAccent"
+            android:layout_gravity="center"
             android:minHeight="50dp"
             android:minWidth="50dp" />
 

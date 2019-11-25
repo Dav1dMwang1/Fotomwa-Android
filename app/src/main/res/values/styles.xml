@@ -94,4 +94,8 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="CustomTabText">
+        <item name="android:textSize">6sp</item>
+    </style>
+
 </resources>

@@ -8,12 +8,7 @@
 
     <include layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp" />
-
-<!--    <include layout="@layout/bottom_navigation"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_width="match_parent" />-->
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/side_nav_view"

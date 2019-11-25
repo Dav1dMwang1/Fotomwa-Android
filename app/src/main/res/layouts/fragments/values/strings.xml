@@ -102,5 +102,8 @@
     <string name="all_orders">All Orders</string>
     <string name="order_progress">Order Progress</string>
     <string name="purchase_order">Purchase</string>
+    <string name="time_left_text">Time Left</string>
+    <string name="order_progress_text">Order Progress:</string>
+    <string name="order_status">Order Status</string>
 
 </resources>

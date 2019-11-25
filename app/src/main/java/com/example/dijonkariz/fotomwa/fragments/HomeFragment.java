@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
         int position = viewHolder.getAdapterPosition();
         Order orderObject = orderList.get(position);
-        Toast.makeText(getActivity(), "You Clicked: " + orderObject.getOrder_type(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Goes to the Individual View for a Particular Order", Toast.LENGTH_SHORT).show();
     };
     private OrdersAdapter ordersAdapter;
 

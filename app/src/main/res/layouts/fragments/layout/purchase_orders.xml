@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:scrollingCache="true"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.dijonkariz.fotomwa.fragments.orders.ViewOrdersFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +33,7 @@
                 android:padding="10dp"
                 android:inputType="textPersonName"
                 android:hint="@string/brand_type"
+
                 android:textColor="@color/black"
                 android:importantForAutofill="no"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -147,4 +153,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

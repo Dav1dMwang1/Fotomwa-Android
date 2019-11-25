@@ -41,7 +41,6 @@ import com.example.dijonkariz.fotomwa.fragments.SettingsFragment;
 import com.example.dijonkariz.fotomwa.helper.CircleTransform;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -62,7 +61,6 @@ public class LandingPageActivity extends AppCompatActivity {
     public static int navItemIndex = 0;
     private AppBarLayout appBarLayout;
     private CollapsingToolbarLayout collapsingToolbar;
-    private BottomNavigationView bottomNavigationView;
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
@@ -105,37 +103,6 @@ public class LandingPageActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
         }
-
-
-//        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
-//            switch (menuItem.getItemId()) {
-//                case R.id.view_orders:
-//                    Toast.makeText(LandingPageActivity.this, R.string.view_orders, Toast.LENGTH_LONG).show();
-//                    break;
-//                case R.id.make_order:
-//                    Toast.makeText(LandingPageActivity.this, R.string.new_order, Toast.LENGTH_LONG).show();
-//                    break;
-//                case R.id.order_progress:
-//                    Toast.makeText(LandingPageActivity.this, R.string.current_order, Toast.LENGTH_LONG).show();
-//                    break;
-//            }
-//            return true;
-//        });
-
-//        Reselecting the Bottom Navigation View
-//        bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {
-//            switch (menuItem.getItemId()) {
-//                case R.id.view_orders:
-//                    Toast.makeText(LandingPageActivity.this, "View Orders Reselected", Toast.LENGTH_LONG).show();
-//                    break;
-//                case R.id.make_order:
-//                    Toast.makeText(LandingPageActivity.this, "New Order Reselected", Toast.LENGTH_LONG).show();
-//                    break;
-//                case R.id.order_progress:
-//                    Toast.makeText(LandingPageActivity.this, "Progress for Orders Reselected", Toast.LENGTH_LONG).show();
-//                    break;
-//            }
-//        });
     }
 
     private void initContent() {
@@ -165,8 +132,6 @@ public class LandingPageActivity extends AppCompatActivity {
         progressBar = navHeader.findViewById(R.id.progressBar_cyclic);
 
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
     @Override
