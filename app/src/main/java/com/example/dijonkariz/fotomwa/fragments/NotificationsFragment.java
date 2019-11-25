@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,19 +28,11 @@ public class NotificationsFragment extends Fragment {
     private static final String TAG = NotificationsFragment.class.getSimpleName();
     private List<Message> messages = new ArrayList<>();
     private RecyclerView recyclerView;
-    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //TODO: Step 4 of 4: Finally call getTag() on the view.
-            // This viewHolder will have all required values.
-            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
-            int position = viewHolder.getAdapterPosition();
-            // viewHolder.getItemId();
-            // viewHolder.getItemViewType();
-            // viewHolder.itemView;
-            Message notificationMessage = messages.get(position);
-            Toast.makeText(getActivity(), "You Clicked: " + notificationMessage.getTitle(), Toast.LENGTH_SHORT).show();
-        }
+    private View.OnClickListener onItemClickListener = v -> {
+        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+        int position = viewHolder.getAdapterPosition();
+        Message notificationMessage = messages.get(position);
+        Toast.makeText(getActivity(), "You Clicked: " + notificationMessage.getTitle(), Toast.LENGTH_SHORT).show();
     };
     private MessagesAdapter messagesAdapter;
 
@@ -54,6 +48,8 @@ public class NotificationsFragment extends Fragment {
         messagesAdapter = new MessagesAdapter(getContext(), messages);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(messagesAdapter);

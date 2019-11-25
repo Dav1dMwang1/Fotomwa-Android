@@ -50,7 +50,7 @@
                     android:layout_below="@id/user_profile_img"
                     android:layout_centerHorizontal="true"
                     android:text="@string/backdrop_title"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/fmwa_red"
                     android:textSize="@dimen/user_profile_name" />
 
                 <TextView
@@ -60,28 +60,29 @@
                     android:layout_below="@id/user_profile_name"
                     android:layout_centerHorizontal="true"
                     android:text="@string/backdrop_subtitle"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/fmwa_red"
                     android:textSize="@dimen/user_profile_email" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/view_profile"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    app:strokeColor="@color/black"
 
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@id/user_profile_img"
-                    android:background="@color/fmwa_red"
                     android:text="@string/view_profile" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/edit_profile"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    app:strokeColor="@color/black"
+
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/user_profile_img"
-                    android:background="@color/fmwa_red"
                     android:text="@string/edit_profile" />
 
             </RelativeLayout>

@@ -4,19 +4,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.dijonkariz.fotomwa.API_connect.LoginResponse;
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.RetrofitFactory;
 import com.example.dijonkariz.fotomwa.interfaces.RetrofitServices;
+import com.google.android.material.button.MaterialButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
-    @BindView(R.id.btn_login) Button loginButton;
+    @BindView(R.id.btn_login) MaterialButton loginButton;
     @BindView(R.id.link_signup) TextView signupLink;
 
     @Override
@@ -40,29 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
-                login();
+        loginButton.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.greyish));
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
+            login();
 //                Retrofit retrofit = RetrofitFactory.getRetrofit();
 //                RetrofitServices retrofitServices = retrofit.create(RetrofitServices.class);
 //                Call<LoginResponse> call = retrofitServices.isValidUser();
-                startActivityForResult(intent, REQUEST_SIGNUP);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-            }
+            startActivityForResult(intent, REQUEST_SIGNUP);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
 
-        signupLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-            }
+        signupLink.setOnClickListener(v -> {
+            // Start the Signup activity
+            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         });
     }
 

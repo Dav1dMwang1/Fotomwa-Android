@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,19 +15,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.OrdersAdapter;
 import com.example.dijonkariz.fotomwa.model.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
-    private OrdersAdapter ordersAdapter;
+    private List<Order> orderList = new ArrayList<>();
     private ProgressBar currentOrdersProgressBar, recentOrdersProgressBar;
     private RecyclerView recyclerViewCurrentOrders, recyclerViewRecentOrders;
-    private ArrayList<Order> orderList;
+    private View.OnClickListener onOrderItemClickListener = v -> {
+        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+        int position = viewHolder.getAdapterPosition();
+        Order orderObject = orderList.get(position);
+        Toast.makeText(getActivity(), "You Clicked: " + orderObject.getOrder_type(), Toast.LENGTH_SHORT).show();
+    };
+    private OrdersAdapter ordersAdapter;
 
     public HomeFragment() {}
 
@@ -35,6 +44,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ordersAdapter = new OrdersAdapter(getContext(), orderList);
         recyclerViewCurrentOrders = view.findViewById(R.id.current_orders_list);
         recyclerViewRecentOrders = view.findViewById(R.id.recent_orders_list);
         currentOrdersProgressBar = view.findViewById(R.id.current_orders_progressBar);
@@ -48,46 +58,34 @@ public class HomeFragment extends Fragment {
 
     //    Initialize RecyclerView
     private void initRecyclerView(RecyclerView recyclerView) {
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
 
+        recyclerView.setLayoutManager(layoutManager);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setMotionEventSplittingEnabled(false);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(ordersAdapter);
+        ordersAdapter.setOnItemClickListener(onOrderItemClickListener);
 
         prepareOrders();
-
-        recyclerView.setAdapter(ordersAdapter);
     }
 
     /**
      * Adding few orders for testing
      */
     private void prepareOrders() {
-        orderList = new ArrayList<Order>();
-
         Order a = new Order("Nicollet Njora", "Customer");
-        orderList.add(a);
-
         Order b = new Order("David Kariuki", "Administrator");
-        orderList.add(b);
-
         Order c = new Order("Nannet Wanjiku", "Customer");
-        orderList.add(c);
-
         Order d = new Order("John Mwangi", "Customer");
+        orderList.add(a);
+        orderList.add(b);
+        orderList.add(c);
         orderList.add(d);
-        orderList.add(d);
-        orderList.add(d);
-        orderList.add(d);
-        orderList.add(d);
-        orderList.add(d);
-
-        ordersAdapter = new OrdersAdapter(orderList);
         ordersAdapter.notifyDataSetChanged();
     }
 }

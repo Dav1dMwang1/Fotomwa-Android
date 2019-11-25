@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/general_pref_category">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/general_pref_category" app:iconSpaceReserved="false">
         <EditTextPreference
             android:defaultValue="@string/default_gallery_storage"
             android:key="@string/key_gallery_name"
             android:summary="@string/default_gallery_storage"
-            android:title="@string/title_default_storage" />
+            android:title="@string/title_default_storage"
+            app:iconSpaceReserved="false"/>
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/key_upload_over_wifi"
             android:summary="@string/summary_upload_over_wifi"
-            android:title="@string/title_auto_upload" />
+            android:title="@string/title_auto_upload"
+            app:iconSpaceReserved="false"/>
 
         <ListPreference
             android:defaultValue="3"
@@ -20,13 +23,15 @@
             android:entryValues="@array/pref_upload_quality_values"
             android:key="@string/key_upload_quality"
             android:summary="@string/summary_upload_image_quality"
-            android:title="@string/title_upload_quality" />
+            android:title="@string/title_upload_quality"
+            app:iconSpaceReserved="false"/>
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/key_upload_over_wifi"
             android:summary="@string/summary_download_over_wifi"
-            android:title="@string/title_auto_download" />
+            android:title="@string/title_auto_download"
+            app:iconSpaceReserved="false"/>
 
         <ListPreference
             android:defaultValue="3"
@@ -35,14 +40,16 @@
             android:entryValues="@array/pref_download_quality_values"
             android:key="@string/key_download_quality"
             android:summary="@string/summary_download_image_quality"
-            android:title="@string/title_download_quality" />
+            android:title="@string/title_download_quality"
+            app:iconSpaceReserved="false"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_title_notifications">
+    <PreferenceCategory android:title="@string/pref_title_notifications" app:iconSpaceReserved="false">
         <SwitchPreference
             android:defaultValue="true"
             android:key="@string/notifications_new_message"
-            android:title="@string/title_new_notification_sound" />
+            android:title="@string/title_new_notification_sound"
+            app:iconSpaceReserved="false"/>
 
 <!--        <RingtonePreference-->
 <!--            android:defaultValue="content://settings/system/notification_sound"-->
@@ -56,37 +63,42 @@
             android:defaultValue="true"
             android:key="@string/key_vibrate"
             android:summary="@string/summary_vibrate"
-            android:title="@string/title_vibrate" />
+            android:title="@string/title_vibrate"
+            app:iconSpaceReserved="false"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_header_about">
+    <PreferenceCategory android:title="@string/pref_header_about" app:iconSpaceReserved="false">
         <Preference
             android:selectable="false"
-            android:summary="@string/summary_about" />
+            android:summary="@string/summary_about"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:title="@string/app_version"
-            android:summary="@string/title_version" />
+            android:summary="@string/title_version"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="@string/key_send_feedback"
             android:title="@string/title_send_feedback"
-            android:summary="@string/summary_support" />
+            android:summary="@string/summary_support"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:title="@string/title_faq"
-            android:summary="@string/summary_faq">
+            android:summary="@string/summary_faq"
+            app:iconSpaceReserved="false">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="@string/url_faq" />
         </Preference>
 
-        <Preference android:title="@string/activity_title_privacy_policy">
+        <Preference android:title="@string/activity_title_privacy_policy" app:iconSpaceReserved="false">
             <intent android:action="android.intent.action.VIEW"
                 android:data="@string/url_privacy"/>
         </Preference>
 
-        <Preference android:title="@string/title_terms">
+        <Preference android:title="@string/title_terms" app:iconSpaceReserved="false">
             <intent android:action="android.intent.action.VIEW"
                 android:data="@string/url_terms"/>
         </Preference>

@@ -3,22 +3,13 @@ package com.example.dijonkariz.fotomwa.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-import android.view.MenuItem;
 
 import com.example.dijonkariz.fotomwa.R;
 
@@ -101,7 +92,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * Appends the necessary device information to email body
      * useful when providing support
      */
-    public static void sendFeedback(Context context) {
+    private static void sendFeedback(Context context) {
         String body = null;
         try {
             body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
