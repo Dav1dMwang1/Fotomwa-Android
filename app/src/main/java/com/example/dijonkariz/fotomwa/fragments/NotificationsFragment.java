@@ -1,15 +1,19 @@
 package com.example.dijonkariz.fotomwa.fragments;
 
+// TODO: add expanded notification for more details
+
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
+import androidx.transition.Fade;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.MessagesAdapter;
 import com.example.dijonkariz.fotomwa.model.Message;
+import com.example.dijonkariz.fotomwa.other.DetailsTransition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +38,18 @@ public class NotificationsFragment extends Fragment {
         int position = viewHolder.getAdapterPosition();
         Message notificationMessage = messages.get(position);
         Toast.makeText(getActivity(), "Does the Expand Notification Message to show more Content.", Toast.LENGTH_SHORT).show();
+//        Fragment fragment = new IndividualOrderFragment(notificationMessage);
+////        Animation
+//        fragment.setSharedElementEnterTransition(new DetailsTransition());
+//        fragment.setEnterTransition(new Fade());
+//        setExitTransition(new Fade());
+//        fragment.setSharedElementReturnTransition(new DetailsTransition());
+//
+//        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.addSharedElement(viewHolder.itemView, String.valueOf(R.string.transition_string))
+//                .replace(R.id.frame, fragment, TAG)
+//                .addToBackStack(null)
+//                .commitAllowingStateLoss();
     };
     private MessagesAdapter messagesAdapter;
 

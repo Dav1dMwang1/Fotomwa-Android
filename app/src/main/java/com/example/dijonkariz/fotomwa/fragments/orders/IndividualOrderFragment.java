@@ -1,4 +1,5 @@
 package com.example.dijonkariz.fotomwa.fragments.orders;
+// TODO: Add BindView to TextView Elements
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

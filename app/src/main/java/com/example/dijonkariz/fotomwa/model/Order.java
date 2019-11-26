@@ -1,4 +1,5 @@
 package com.example.dijonkariz.fotomwa.model;
+// TODO: Add Content for values and attributes for an Order
 
 public class Order {
     private String order_type;

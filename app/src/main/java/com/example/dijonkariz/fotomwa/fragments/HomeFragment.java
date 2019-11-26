@@ -4,12 +4,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
+import androidx.transition.Fade;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,9 @@ import android.widget.Toast;
 
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.OrdersAdapter;
+import com.example.dijonkariz.fotomwa.fragments.orders.IndividualOrderFragment;
 import com.example.dijonkariz.fotomwa.model.Order;
+import com.example.dijonkariz.fotomwa.other.DetailsTransition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,18 @@ public class HomeFragment extends Fragment {
         int position = viewHolder.getAdapterPosition();
         Order orderObject = orderList.get(position);
         Toast.makeText(getActivity(), "Goes to the Individual View for a Particular Order", Toast.LENGTH_SHORT).show();
+        Fragment fragment = new IndividualOrderFragment(orderObject);
+//        Animation
+        fragment.setSharedElementEnterTransition(new DetailsTransition());
+        fragment.setEnterTransition(new Fade());
+        setExitTransition(new Fade());
+        fragment.setSharedElementReturnTransition(new DetailsTransition());
+
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.addSharedElement(viewHolder.itemView, String.valueOf(R.string.transition_string))
+                .replace(R.id.frame, fragment, TAG)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
     };
     private OrdersAdapter ordersAdapter;
 
