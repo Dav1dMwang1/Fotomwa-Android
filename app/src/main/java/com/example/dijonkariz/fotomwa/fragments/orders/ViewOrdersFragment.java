@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -73,7 +71,7 @@ public class ViewOrdersFragment extends Fragment implements OnBackPressed {
         recyclerView.setAdapter(ordersAdapter);
         ordersAdapter.setOnItemClickListener(onItemClickListener);
 
-        prepareOrders();
+        viewAllOrders();
 
         return view;
     }
@@ -81,7 +79,7 @@ public class ViewOrdersFragment extends Fragment implements OnBackPressed {
     /**
      * Adding few orders for testing
      */
-    private void prepareOrders() {
+    private void viewAllOrders() {
         Order a = new Order("Nicollet Njora", "Customer");
         Order b = new Order("David Kariuki", "Administrator");
         Order c = new Order("Nannet Wanjiku", "Customer");

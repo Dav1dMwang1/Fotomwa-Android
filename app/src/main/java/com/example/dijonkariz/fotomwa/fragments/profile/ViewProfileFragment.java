@@ -1,22 +1,22 @@
-package com.example.dijonkariz.fotomwa.fragments;
+package com.example.dijonkariz.fotomwa.fragments.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.dijonkariz.fotomwa.R;
+import com.example.dijonkariz.fotomwa.activity.UserProfileActivity;
 
-import java.util.Objects;
-
-public class AboutUsFragment extends Fragment {
-    private static final String TAG = AboutUsFragment.class.getSimpleName();
-
-    public AboutUsFragment() {}
+public class ViewProfileFragment extends Fragment {
+    private static final String TAG = ViewProfileFragment.class.getSimpleName();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,12 +26,15 @@ public class AboutUsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_terms, container, false);
+        return inflater.inflate(R.layout.view_profile, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Objects.requireNonNull(getActivity()).setTitle("Home");
+        ImageView viewProfile = view.findViewById(R.id.view_profile_icon);
+        viewProfile.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), UserProfileActivity.class).putExtra("USER_CHOICE", "EDIT")); getActivity().finish();
+        });
     }
 }

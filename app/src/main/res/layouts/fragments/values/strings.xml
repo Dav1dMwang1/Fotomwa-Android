@@ -106,5 +106,22 @@
     <string name="order_progress_text">Order Progress:</string>
     <string name="order_status">Order Status</string>
     <string name="key_download_over_wifi">key_download_over_wifi</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+
+<!--    User Profile-->
+    <string name="profile_no_of_customer_orders">Orders</string>
+    <string name="no_of_orders_text">25</string>
+    <string name="profile_customer_type">Customer Type</string>
+    <string name="customer_status_text">Customer</string>
+    <string name="profile_user_image_desc">Profile User Image</string>
+    <string name="profile_user_location">Nairobi, KE</string>
+    <string name="profile_user_email_label">User Email</string>
+    <string name="navigate_back">Back Navigation Icon</string>
+    <string name="user_profile_activity">User Profile</string>
+    <string name="profile_user_email_placeholder">Fotomwa@fotomwa.com</string>
+    <string name="profile_user_phone_placeholder">Phone</string>
+    <string name="profile_user_phone_label">Phone</string>
+    <string name="edit_profile_user_fname">First Name</string>
+    <string name="edit_profile_lname">Last Name</string>
 
 </resources>

@@ -43,13 +43,14 @@
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutUsActivity">
+        <activity android:name=".activity.TermsAndConditionsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity android:name=".activity.AppCompatPreferenceActivity" />
         <activity android:name=".activity.SettingsPrefActivity" />
+        <activity android:name=".activity.UserProfileActivity" />
     </application>
 
 </manifest>

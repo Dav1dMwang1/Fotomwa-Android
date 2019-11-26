@@ -98,4 +98,8 @@
         <item name="android:textSize">6sp</item>
     </style>
 
+    <style name="RoundedButtons">
+        <item name="android:background">@drawable/rounded_shape</item>
+    </style>
+
 </resources>

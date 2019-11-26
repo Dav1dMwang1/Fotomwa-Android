@@ -55,6 +55,11 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {}
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +73,8 @@ public class HomeFragment extends Fragment {
 
         initRecyclerView(recyclerViewCurrentOrders);
         initRecyclerView(recyclerViewRecentOrders);
+
+        prepareOrders();
 
         return view;
     }
@@ -86,8 +93,6 @@ public class HomeFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(ordersAdapter);
         ordersAdapter.setOnItemClickListener(onOrderItemClickListener);
-
-        prepareOrders();
     }
 
     /**
@@ -95,12 +100,12 @@ public class HomeFragment extends Fragment {
      */
     private void prepareOrders() {
         Order a = new Order("Nicollet Njora", "Customer");
-        Order b = new Order("David Kariuki", "Administrator");
-        Order c = new Order("Nannet Wanjiku", "Customer");
-        Order d = new Order("John Mwangi", "Customer");
         orderList.add(a);
+        Order b = new Order("David Kariuki", "Administrator");
         orderList.add(b);
+        Order c = new Order("Nannet Wanjiku", "Customer");
         orderList.add(c);
+        Order d = new Order("John Mwangi", "Customer");
         orderList.add(d);
         ordersAdapter.notifyDataSetChanged();
     }

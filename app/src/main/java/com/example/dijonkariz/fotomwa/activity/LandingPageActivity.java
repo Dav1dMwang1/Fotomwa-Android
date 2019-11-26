@@ -54,7 +54,7 @@ public class LandingPageActivity extends AppCompatActivity {
     private static final String TAG_PHOTOS = PhotosFragment.class.getSimpleName();
     private static final String TAG_NOTIFICATIONS = NotificationsFragment.class.getSimpleName();
     private static final String TAG_SETTINGS = SettingsFragment.class.getSimpleName();
-    private static final String TAG_ABOUT = AboutUsActivity.class.getSimpleName();
+    private static final String TAG_TERMS = TermsAndConditionsActivity.class.getSimpleName();
     private static final String TAG_PRIVACY = PrivacyPolicyActivity.class.getSimpleName();
     private static String CURRENT_TAG = TAG_HOME;
 
@@ -215,8 +215,6 @@ public class LandingPageActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem (MenuItem menuItem) {
-//        Fragment fragment = null;
-//        Class fragmentClass;
         switch (menuItem.getItemId()) {
             case R.id.nav_orders:
                 navItemIndex = 1;
@@ -234,8 +232,8 @@ public class LandingPageActivity extends AppCompatActivity {
                 navItemIndex = 4;
                 CURRENT_TAG = TAG_SETTINGS;
                 break;
-            case R.id.nav_about_us:
-                startActivity(new Intent(LandingPageActivity.this, AboutUsActivity.class));
+            case R.id.nav_terms:
+                startActivity(new Intent(LandingPageActivity.this, TermsAndConditionsActivity.class));
                 drawerLayout.closeDrawers();
                 return;
             case R.id.nav_privacy_policy:
@@ -407,15 +405,15 @@ public class LandingPageActivity extends AppCompatActivity {
 
 //    Listener for Launching Editing Order Profile Activity
     private void launchEditProfile() {
-        editProfile.setOnClickListener(v -> Toast.makeText(LandingPageActivity.this, getString(R.string.launch_editProfile), Toast.LENGTH_LONG).show());
+        editProfile.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class).putExtra("USER_CHOICE", "EDIT")); finish();
+        });
     }
 
 //    Listener for Launching Viewing Order Profile Activity
     private void launchViewProfile() {
-        viewProfile.setOnClickListener(v -> Toast.makeText(LandingPageActivity.this, getString(R.string.launch_viewProfile), Toast.LENGTH_LONG).show());
+        viewProfile.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class).putExtra("USER_CHOICE", "VIEW")); finish();
+        });
     }
-
-//    private void OrdersRecyclerView () {
-//
-//    }
 }
