@@ -28,7 +28,7 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/key_upload_over_wifi"
+            android:key="@string/key_download_over_wifi"
             android:summary="@string/summary_download_over_wifi"
             android:title="@string/title_auto_download"
             app:iconSpaceReserved="false"/>

@@ -2,6 +2,9 @@
     <!--Application Name-->
     <string name="app_name">Fotomwa Ltd</string>
 
+<!--    Animation-->
+    <string name="transition_string">anime</string>
+
     <!--Welcome Slider-->
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>

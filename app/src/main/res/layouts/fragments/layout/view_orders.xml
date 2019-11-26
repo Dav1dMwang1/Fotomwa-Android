@@ -45,6 +45,7 @@
                     android:id="@+id/all_orders_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:transitionName="@string/transition_string"
                     android:padding="4dp"
                     android:layout_margin="4dp" />
 
@@ -69,17 +70,6 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
-        <me.saket.inboxrecyclerview.InboxRecyclerView
-            android:id="@+id/test_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <me.saket.inboxrecyclerview.page.ExpandablePageLayout
-            android:id="@+id/test_expansion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"/>
 
     </LinearLayout>
 

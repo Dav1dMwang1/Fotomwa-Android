@@ -10,9 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.dijonkariz.fotomwa.R;
+import com.example.dijonkariz.fotomwa.interfaces.OnBackPressed;
 import com.example.dijonkariz.fotomwa.model.Order;
 
-public class IndividualOrderFragment extends Fragment {
+public class IndividualOrderFragment extends Fragment implements OnBackPressed {
     private static final String TAG = ViewOrdersFragment.class.getSimpleName();
     private Order order;
 
@@ -30,5 +31,8 @@ public class IndividualOrderFragment extends Fragment {
         return view;
     }
 
+    public void onBackPressed(){
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
 
 }
