@@ -22,6 +22,6 @@
         android:id="@+id/terms_webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/privacy_toolbar"/>
+        app:layout_constraintTop_toBottomOf="@id/terms_toolbar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

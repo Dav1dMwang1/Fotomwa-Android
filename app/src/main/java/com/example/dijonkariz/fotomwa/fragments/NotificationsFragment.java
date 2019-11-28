@@ -26,7 +26,9 @@ import com.example.dijonkariz.fotomwa.adapter.MessagesAdapter;
 import com.example.dijonkariz.fotomwa.model.Message;
 import com.example.dijonkariz.fotomwa.other.DetailsTransition;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NotificationsFragment extends Fragment {
@@ -99,7 +101,7 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void prepareMessagesData() {
-        Message message = new Message("Customer Actions", "Customer has created a new Order", "13:01 p.m");
+        Message message = new Message("Customer Actions", "Customer has created a new Order", new Timestamp(new Date().getTime()));
         messages.add(message);
         messages.add(message);
         messages.add(message);

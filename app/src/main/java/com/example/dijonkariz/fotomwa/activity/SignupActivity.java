@@ -14,10 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.dijonkariz.fotomwa.R;
+import com.example.dijonkariz.fotomwa.model.User;
+import com.example.dijonkariz.fotomwa.network.thiga.APIService;
+import com.example.dijonkariz.fotomwa.network.thiga.APIUrl;
+import com.example.dijonkariz.fotomwa.network.thiga.Result;
 import com.google.android.material.button.MaterialButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -41,7 +50,6 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setOnClickListener(v -> signup());
 
         _loginLink.setOnClickListener(v -> {
-            // Finish the registration screen and return to the Login activity
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
             finish();
@@ -72,6 +80,26 @@ public class SignupActivity extends AppCompatActivity {
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(APIUrl.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+
+        APIService service = retrofit.create(APIService.class);
+
+        User user = new User();
+        user.setEmail("david.mwangi.john@gmail.com");
+
+        Call<Result> call = service.createUser(user.getEmail());
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         new android.os.Handler().postDelayed(
                 () -> {
@@ -90,7 +118,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
 

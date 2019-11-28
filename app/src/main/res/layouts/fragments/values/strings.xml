@@ -9,8 +9,8 @@
     <string name="current_order_due_date">Due Date:</string>
     <string name="expand">More</string>
     <string name="view_current_order_info">Info</string>
-    <string name="order_type_text">Order Type</string>
-    <string name="order_size_text">Order Size</string>
+    <string name="brand_name_text">Brand Name</string>
+    <string name="product_name_text">Product Name</string>
     <string name="order_view_icon">Order View Icon</string>
 
     <!--    Settings-->
@@ -123,5 +123,6 @@
     <string name="profile_user_phone_label">Phone</string>
     <string name="edit_profile_user_fname">First Name</string>
     <string name="edit_profile_lname">Last Name</string>
+    <string name="test_connection_btn">Test Connection</string>
 
 </resources>

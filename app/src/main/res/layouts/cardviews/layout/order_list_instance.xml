@@ -12,26 +12,26 @@
     android:transitionName="@string/transition_string">
 
     <TextView
-        android:id="@+id/order_type"
+        android:id="@+id/brand_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/order_list_margin"
         android:minWidth="120dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/order_type_text"
+        android:text="@string/brand_name_text"
         android:textSize="@dimen/order_list_text" />
 
     <TextView
-        android:id="@+id/order_size"
+        android:id="@+id/product_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/order_list_margin"
         android:minWidth="100dp"
-        app:layout_constraintLeft_toRightOf="@id/order_type"
+        app:layout_constraintLeft_toRightOf="@id/brand_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
-        android:text="@string/order_size_text"
+        android:text="@string/product_name_text"
         android:textSize="@dimen/order_list_text" />
 
     <ImageView

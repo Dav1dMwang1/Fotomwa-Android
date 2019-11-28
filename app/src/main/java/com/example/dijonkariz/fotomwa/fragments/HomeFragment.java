@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import androidx.transition.Fade;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,9 @@ import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.adapter.OrdersAdapter;
 import com.example.dijonkariz.fotomwa.fragments.orders.IndividualOrderFragment;
 import com.example.dijonkariz.fotomwa.model.Order;
+import com.example.dijonkariz.fotomwa.network.CategoriesController;
 import com.example.dijonkariz.fotomwa.other.DetailsTransition;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "Creating Fragment");
     }
 
     @Nullable
@@ -70,6 +74,14 @@ public class HomeFragment extends Fragment {
         recyclerViewRecentOrders = view.findViewById(R.id.recent_orders_list);
         currentOrdersProgressBar = view.findViewById(R.id.current_orders_progressBar);
         recentOrdersProgressBar = view.findViewById(R.id.recent_orders_progressBar);
+
+        MaterialButton testCategoryFetch = view.findViewById(R.id.test_categories);
+        testCategoryFetch.setOnClickListener(v -> {
+            Log.i(TAG, "Test Button Clicked");
+            Toast.makeText(getContext(), "Testing Fetch Categories", Toast.LENGTH_SHORT).show();
+            CategoriesController categoriesController = new CategoriesController();
+            categoriesController.start();
+        });
 
         initRecyclerView(recyclerViewCurrentOrders);
         initRecyclerView(recyclerViewRecentOrders);

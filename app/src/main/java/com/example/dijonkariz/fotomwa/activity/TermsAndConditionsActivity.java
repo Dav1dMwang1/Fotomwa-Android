@@ -26,16 +26,17 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.terms_webview);
         myWebView.loadUrl("https://www.websitepolicies.com/policies/view/7IPttZ2P");
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+//        myWebView.loadUrl("https://fotomwa.herokuapp.com/");
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

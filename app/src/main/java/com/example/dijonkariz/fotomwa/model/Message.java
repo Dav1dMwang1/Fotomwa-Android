@@ -1,14 +1,26 @@
 package com.example.dijonkariz.fotomwa.model;
 
+import java.sql.Timestamp;
+
 public class Message {
-    private String title, description, time;
+    private Long id;
+    private String title, description;
+    private Timestamp notification_time;
 
     public Message() {}
 
-    public Message(String title, String description, String time) {
+    public Message(String title, String description, Timestamp notification_time) {
         this.title = title;
         this.description = description;
-        this.time = time;
+        this.notification_time = notification_time;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -27,11 +39,11 @@ public class Message {
         this.description = description;
     }
 
-    public String getTime() {
-        return time;
+    public Timestamp getNotification_time() {
+        return notification_time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setNotification_time(Timestamp notification_time) {
+        this.notification_time = notification_time;
     }
 }

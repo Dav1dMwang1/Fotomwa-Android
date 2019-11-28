@@ -8,6 +8,7 @@ public class RetrofitFactory {
     private static final String BASE_URL = "127.0.0.1:3000";
 
     private RetrofitFactory() {}
+
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL)

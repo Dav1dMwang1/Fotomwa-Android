@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dijonkariz.fotomwa.R;
 import com.example.dijonkariz.fotomwa.model.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
@@ -33,8 +32,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
-        myViewHolder.order_type.setText(orderList.get(i).getOrder_type());
-        myViewHolder.order_size.setText(orderList.get(i).getOrder_size());
+        myViewHolder.order_brand.setText(orderList.get(i).getBrand_name());
+        myViewHolder.order_product.setText(orderList.get(i).getProduct_type());
     }
 
     @Override
@@ -43,14 +42,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView order_type, order_size;
+        TextView order_brand, order_product;
         ImageView view_icon;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setTag(this);
-            order_type = itemView.findViewById(R.id.order_type);
-            order_size = itemView.findViewById(R.id.order_size);
+            order_brand = itemView.findViewById(R.id.brand_name);
+            order_product = itemView.findViewById(R.id.product_type);
             view_icon = itemView.findViewById(R.id.order_list_view_icon);
             itemView.setOnClickListener(onOrderItemClickListener);
         }

@@ -33,7 +33,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.notification_title.setText(messages.get(position).getTitle());
         holder.notification_desc.setText(messages.get(position).getDescription());
-        holder.notification_time.setText(messages.get(position).getTime());
+        holder.notification_time.setText(messages.get(position).getNotification_time().toString());
     }
 
     @Override
